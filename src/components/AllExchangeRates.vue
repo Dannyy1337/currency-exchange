@@ -1,23 +1,22 @@
 <template>
   <div>
-    <p>{{ rate }}</p>
     <input type="number" v-model.number="amount" placeholder="Enter Amount" />
     <p>from:</p>
     <select v-model="convertFrom">
-      <option v-for="(rate, index) in exchangeRates" :key="index">
+      <option v-for="(rate, index) in exchangeRatesBasic" :key="index">
         {{ rate.base_ccy }}
       </option>
     </select>
     <p>to:</p>
     <select v-model="convertTo">
-      <option v-for="(rate, index) in exchangeRates" :key="index">
+      <option v-for="(rate, index) in exchangeRatesBasic" :key="index">
         {{ rate.ccy }}
       </option>
     </select>
     <span>
       {{ amount }} {{ convertFrom }} : {{ finalAmount }} {{ convertTo }}</span
     ><br />
-    {{ exchangeRates }}
+    {{ exchangeRatesBasic }}
   </div>
 </template>
 
@@ -33,36 +32,26 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["exchangeRates"]),
+    ...mapGetters(["exchangeRatesBasic"]),
     finalAmount() {
-      let to = this.convertTo;
-      let from = this.convertFrom;
-      let course = this.exchangeRates;
-      let final;
-      switch (from) {
-        case "UAH":
-          if (to == "EUR") {
-            final = this.amount * course[0].buy;
-          }
-          if (to == "RUR") {
-            final = this.amount * course[1].buy;
-          }
-          if (to == "USD") {
-            final = this.amount * course[2].buy;
-          }
-          if (to == "BTC") {
-            final = this.amount * course[3].buy;
-          }
-          break;
+        if (this.convertTo) {
+          let convertToBuy = this.exchangeRatesBasic.find((item) => item.ccy === this.convertTo);
+
+          return this.amount * convertToBuy.buy;
+      } else {
+        return '';
       }
-      return final;
+
+     
     },
   },
   methods: {
-    ...mapActions(["getExchangeRates"]),
+    ...mapActions(["getExchangeRatesBasic"]),
+    // ...mapActions(["getExchangeRatesMore"]),
   },
   mounted() {
-    this.getExchangeRates();
+    this.getExchangeRatesBasic();
+    // this.getExchangeRatesMore();
   },
 };
 </script>

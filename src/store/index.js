@@ -14,15 +14,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getExchangeRatesBasic({ commit }) {
+    async getExchangeRatesBasic({ commit }, baseCurrency) {
       await axios
         .get(
-          `https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=5`
+          `https://freecurrencyapi.net/api/v2/latest?apikey=20eefe40-7e20-11ec-9c27-29364e5c874d&base_currency=${baseCurrency}`
         )
         .then((exchangeRates) => {
-
-          commit('setExchangeRatesToState', exchangeRates.data)
-          return exchangeRates;
+          commit('setExchangeRatesToState', exchangeRates.data.data)
         })
         .catch((error) => {
           console.log(error)

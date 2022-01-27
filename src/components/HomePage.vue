@@ -102,7 +102,7 @@ export default {
       & select {
         max-height: 50px;
         border-radius: 10px;
-        font-size: 20px;
+        font-size: 18px;
         background: rgba(255, 255, 255, 0.55);
       }
     }

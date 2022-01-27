@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    {{ favorites }}
     <h1>All Exchange Rates</h1>
     <ul class="all-rates">
       <li
@@ -9,7 +8,7 @@
         class="all-rates-item"
       >
         <p>
-          <b>{{ value[0] }}</b> {{ value[1] }}
+          <b>{{ value[0] }}</b>: {{ value[1] }}
         </p>
         <button @click="handleFavorite(value[0])">
           <span v-show="!isFavorite(value[0])" class="material-icons">
@@ -89,10 +88,10 @@ export default {
   margin-bottom: 50px;
   &-item {
     margin: 10px;
-    background: rgba(255, 255, 255, 0.418);
+    background: rgba(255, 255, 255, 0.5);
     border: 2px solid orange;
     color: rgba(255, 197, 88, 0.8);
-    text-shadow: 1.5px 1.5px black;
+    text-shadow: 1px 1px black;
     padding: 5px;
     border-radius: 10px;
     box-shadow: 1px 1px black;

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
@@ -26,20 +27,6 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
-    // async getExchangeRatesMore({ commit }) {
-    //   await axios
-    //     .get(
-    //       `https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=4`
-    //     )
-    //     .then((exchangeRates) => {
-
-    //       commit('setExchangeRatesToState', exchangeRates.data)
-    //       return exchangeRates;
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // }
   },
   getters: {
     exchangeRatesBasic(state) {
@@ -47,5 +34,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
-  }
+  },
+  plugins: [createPersistedState()],
 })

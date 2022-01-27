@@ -7,11 +7,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    exchangeRates: []
+    exchangeRates: [],
+    favorites: []
   },
   mutations: {
     setExchangeRatesToState: (state, exchangeRates) => {
       state.exchangeRates = exchangeRates
+    },
+    pushToFavorites: (state, newFavoritesItem) => {
+      let tempArray = [...state.favorites, newFavoritesItem];
+      state.favorites = [...new Set(tempArray)];
+    },
+    removeFromFavorites: (state, itemForRemove) => {
+      state.favorites = state.favorites.filter((item) => {
+        return item !== itemForRemove;
+      });
     }
   },
   actions: {
@@ -27,6 +37,7 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
+
   },
   getters: {
     exchangeRatesBasic(state) {

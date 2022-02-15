@@ -90,6 +90,7 @@ export default {
       display: flex;
       min-height: 200px;
       align-items: center;
+      flex-wrap: wrap;
       & p {
         color: rgba(252, 164, 0, 0.8);
         text-shadow: 1px 1px white;
@@ -104,26 +105,30 @@ export default {
         border-radius: 10px;
         font-size: 18px;
         background: rgba(255, 255, 255, 0.55);
+        max-width: 360px;
       }
     }
-    &-amount-area{
+    &-amount-area {
       display: flex;
       align-items: center;
       margin-bottom: 50px;
       justify-content: space-between;
       min-width: 100%;
+      flex-wrap: wrap;
       & input {
-         max-height: 50px;
+        max-height: 50px;
         border-radius: 10px;
         font-size: 20px;
         background: rgba(255, 255, 255, 0.55);
         text-align: end;
+        margin-top: 30px;
       }
-      & span{
+      & span {
         color: white;
         text-shadow: 1.5px 1px black;
         font-size: 20px;
         font-weight: bold;
+        margin-top: 30px;
       }
     }
   }
